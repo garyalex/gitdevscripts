@@ -13,7 +13,7 @@ if [ -d .git ]; then
     STATUS=`git status --short --branch` 
     DATE=`date +'%F %R %a'`
     clear
-    echo "GITSWATCH" | toilet -F gay -f smblock -t 
+    echo "GITSWATCH" | toilet -F metal -f smblock -t 
     echo
     echo.BoldYellow "STATUS"
     echo.LightGreen "$STATUS"
