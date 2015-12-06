@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env zsh
 # Will do a repeated git status in the current dir
 # Gary Alexander
 # v0.0.2 - Colorful output is coming
