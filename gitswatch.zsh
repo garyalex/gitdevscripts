@@ -3,22 +3,31 @@
 # Gary Alexander
 # v0.0.2 - Colorful output is coming
 
+# Setup colors for terminal
+autoload colors
+if [[ "$terminfo[colors]" -gt 8 ]]; then
+  colors
+fi
+for COLOR in RED GREEN YELLOW BLUE MAGENTA CYAN BLACK WHITE; do
+  eval $COLOR='$fg_no_bold[${(L)COLOR}]'
+  eval BOLD_$COLOR='$fg_bold[${(L)COLOR}]'
+done
+eval RESET='$reset_color'
+
 CURRENTDIR=`pwd`
 
 if [ -d .git ]; then
   while true
   do
+    PROJECT=`pwd | awk 'BEGIN { FS = "/" } ; { print $NF; }'`
     STATUS=`git status --short --branch` 
     DATE=`date +'%F %R %a'`
     clear
-    echo "GITSWATCH" | toilet -F metal -f smblock -t 
+    echo "$PROJECT" | toilet -f smblock -t 
     echo
-    echo "STATUS"
-    echo "$STATUS"
-    echo "CURRENTDIR"
-    echo "$CURRENTDIR"
-    echo "DATE"
-    echo "$DATE" 
+    echo "$BOLD_GREEN-DATE:   $DATE $RESET" 
+    echo "$BOLD_CYAN-STATUS:$RESET"
+    echo "$YELLOW$STATUS"
     if [[ $1 == "single" ]]; then
       exit 0
     else
@@ -30,7 +39,4 @@ if [ -d .git ]; then
       done
     fi
   done
-else
-  echo "Not a git repo!"
-  exit 1
 fi
