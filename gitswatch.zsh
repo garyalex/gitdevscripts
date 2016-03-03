@@ -23,11 +23,14 @@ if [ -d .git ]; then
     STATUS=`git status --short --branch` 
     DATE=`date +'%F %R %a'`
     clear
+    echo "$RED"
     echo "$PROJECT" | toilet -f smblock -t 
+    # echo "$PROJECT" | figlet -c -o -s -t
     echo
-    echo "$BOLD_GREEN-DATE:   $DATE $RESET" 
-    echo "$BOLD_CYAN-STATUS:$RESET"
-    echo "$YELLOW$STATUS"
+    echo "$BOLD_GREEN DATE: $DATE $RESET" 
+    echo "$BOLD_CYAN STATUS:$YELLOW"
+    echo "$STATUS"
+    echo "$RESET"
     if [[ $1 == "single" ]]; then
       exit 0
     else
